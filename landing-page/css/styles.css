@@ -55,6 +55,11 @@ section {
   min-height: 80vh;
 }
 
+.current-section {
+  background: gray;
+  color: #fff;
+  transition: ease 0.3s all;
+}
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
