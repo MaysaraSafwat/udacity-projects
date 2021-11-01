@@ -29,16 +29,12 @@ const highlight = (section)=>{
     }
 }
 
-/*to determine if section in viewport*/
-function offset (section){
-    return( Math.floor(section.getBoundingClientRect().top));
-}
+
 /*to add the active class if meets offset condition*/
-function addClass (bool , section){
-    if(bool){
-        section.classList.add('your-active-class');
-        highlight(section);
-     }
+function addClass (section){
+    section.classList.add('your-active-class');
+    highlight(section);
+     
 }
 /* to remove active class*/
  function removeClass (section){
@@ -47,10 +43,13 @@ function addClass (bool , section){
 /*to toggle the acttive class on scrolling */ 
  function toggleActiveClass (){
      sections.forEach(section => {
-         const elemOffset = offset(section);
-         InviewPort = ()=> elemOffset <150 && elemOffset >= -150
-        removeClass(section);
-         addClass( InviewPort() , section);
+         const elemOffset =  Math.floor(section.getBoundingClientRect().top) 
+         removeClass(section)
+          if(elemOffset <150 && elemOffset >= -150) 
+         {
+             addClass(section)
+         }
+         
      })
  }
 
