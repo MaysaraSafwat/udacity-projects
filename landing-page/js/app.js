@@ -16,6 +16,23 @@ function createNavItem(){
 createNavItem();
 
 
+
+/* adding smoothscroll */
+const links = document.querySelectorAll("li a");
+for (const link of links) {
+   
+    link.addEventListener("click" , (e)=>{
+        e.preventDefault();
+        const href  =  link.getAttribute("href")
+        document.querySelector(href).scrollIntoView({
+            behavior:"smooth"
+        })
+   })
+ }
+
+
+
+
 /*highlighting which section is being viewed*/
 const highlight = (section)=>{
     const links = document.querySelectorAll("li");
