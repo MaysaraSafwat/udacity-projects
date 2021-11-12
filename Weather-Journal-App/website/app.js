@@ -96,7 +96,7 @@ const DisplayingWeatherDetails = async ()=>{
 //handling request failure
 const handleError = (error)=>{
     console.log(error);
-     errorEl.innerHTML = `${error.cod} : ${error.message}`;
+     errorEl.innerHTML = `Error${error.cod} : ${error.message}`;
      errorEl.classList.add("display");
  
 }
