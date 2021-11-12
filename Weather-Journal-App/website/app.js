@@ -12,7 +12,7 @@ const cityEl=document.getElementById("city");
 const generateBtn = document.getElementById("generate");
 const feeling = document.getElementById("feelings");
 const entryEl = document.querySelector(".entry");
-
+const errorEl = document.querySelector(".error");
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
@@ -22,10 +22,9 @@ const getData = async (zipCode)=>{
     try{
        const res = await fetch(`${baseURL}${zipCode}${ApiKey}&units=metric`);
        const data = await res.json()
-       console.log(data);
        return data
     }catch(error){
-        console.log(`error : ${error}`)
+        console.log(error)
     }
 }
 
@@ -53,6 +52,8 @@ generateBtn.addEventListener("click" , ()=>{
     const feelings = feeling.value;
 
     getData(zipCode).then(data=>{
+        console.log(data.cod)
+        if(data.cod !=404){
         const myData = {
             newDate,
             feelings,
@@ -64,7 +65,11 @@ generateBtn.addEventListener("click" , ()=>{
         postData(serverURL+"/add", myData);
 
         DisplayingWeatherDetails();
-    })
+    } else{
+        handleError(data);
+
+    }
+})
 
 
 });
@@ -74,6 +79,7 @@ const DisplayingWeatherDetails = async ()=>{
     const res = await fetch(serverURL + "/all");
     try{
         const myDetails = await res.json()
+        console.log(myDetails);
 
         date.innerHTML =  `Date : ${myDetails.newDate}`;
         contentEl.innerHTML = `Feeling : ${myDetails.feelings}`;
@@ -85,5 +91,12 @@ const DisplayingWeatherDetails = async ()=>{
 
     }catch(error){
         console.log(error)
-    }
+   }
+}
+//handling request failure
+const handleError = (error)=>{
+    console.log(error);
+     errorEl.innerHTML = `${error.cod} : ${error.message}`;
+     errorEl.classList.add("display");
+ 
 }

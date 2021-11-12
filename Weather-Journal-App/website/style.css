@@ -62,6 +62,10 @@ button {
       transition: all 0.5s linear;
       
  }
+ .error {
+     display: none;
+     opacity: 0;
+ }
  .title {
   width: 100%;
   margin: 10px;

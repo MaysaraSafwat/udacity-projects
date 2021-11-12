@@ -20,7 +20,7 @@ app.listen(port, ()=>{
     console.log(`listening on port : ${port}`)
 });
 
-//requests 
+//routes
 
 app.get('/all' , (req,res)=>{
     res.send(projectData)
